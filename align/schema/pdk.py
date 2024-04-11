@@ -1,4 +1,4 @@
-from pydantic import validator, ValidationError, Field
+from pydantic.v1 import validator, ValidationError, Field
 from .types import BaseModel, Union, Optional, Literal, List
 from typing import Dict
 import pathlib

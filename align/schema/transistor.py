@@ -1,5 +1,5 @@
 from typing import List, Union, Dict, Optional, Tuple
-from pydantic import validator, ValidationError, Field
+from pydantic.v1 import validator, ValidationError, Field
 from . import types
 
 

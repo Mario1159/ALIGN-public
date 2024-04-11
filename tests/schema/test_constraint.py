@@ -3,7 +3,7 @@ import pathlib
 from align.schema import constraint, Model, Instance, SubCircuit, Library
 from align.schema.checker import SolutionNotFoundError
 from align.schema.types import set_context
-from pydantic import ValidationError
+from pydantic.v1 import ValidationError
 
 
 @pytest.fixture

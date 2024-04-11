@@ -7,7 +7,7 @@ import logging
 from . import types
 from .types import BaseModel, Union, Optional, Literal, List, set_context
 
-from pydantic import Field
+from pydantic.v1 import Field
 
 
 logger = logging.getLogger(__name__)

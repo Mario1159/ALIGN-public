@@ -20,14 +20,14 @@ except:
     from typing_extensions import Literal
 
 # Pass through directly from pydantic
-from pydantic import \
+from pydantic.v1 import \
     validator, \
     root_validator, \
     validate_arguments, \
     PrivateAttr
 
 # Custom ALIGN types (BaseModel, List, Dict) defined below
-import pydantic.generics
+import pydantic.v1.generics
 import typing
 import collections
 import random
@@ -57,7 +57,7 @@ def cast_to_solver(item, solver):
             raise NotImplementedError(f'{item}.translate() yielded an empty list of expressions')
         yield from solver.annotate(formulae, solver.label(item))
     
-class BaseModel(pydantic.BaseModel):
+class BaseModel(pydantic.v1.BaseModel):
 
     @property
     def parent(self):
@@ -112,19 +112,19 @@ class BaseModel(pydantic.BaseModel):
         assert self is not None, 'Could not retrieve ctx'
         return self
 
-    _parent = pydantic.PrivateAttr()
+    _parent = pydantic.v1.PrivateAttr()
 
 
 KeyT = typing.TypeVar('KeyT')
 DataT = typing.TypeVar('DataT')
 
 
-class List(pydantic.generics.GenericModel, typing.Generic[DataT]):
+class List(pydantic.v1.generics.GenericModel, typing.Generic[DataT]):
     __root__: typing.Sequence[DataT]
 
-    _commits = pydantic.PrivateAttr()
-    _parent = pydantic.PrivateAttr()
-    _cache = pydantic.PrivateAttr()
+    _commits = pydantic.v1.PrivateAttr()
+    _parent = pydantic.v1.PrivateAttr()
+    _cache = pydantic.v1.PrivateAttr()
 
     @property
     def parent(self):
@@ -210,10 +210,10 @@ class List(pydantic.generics.GenericModel, typing.Generic[DataT]):
             yield from cast_to_solver(item, solver)
 
 
-class Dict(pydantic.generics.GenericModel, typing.Generic[KeyT, DataT]):
+class Dict(pydantic.v1.generics.GenericModel, typing.Generic[KeyT, DataT]):
     __root__: typing.Dict[KeyT, DataT]
 
-    _parent = pydantic.PrivateAttr()
+    _parent = pydantic.v1.PrivateAttr()
 
     @property
     def parent(self):
